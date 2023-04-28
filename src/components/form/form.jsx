@@ -73,28 +73,31 @@ class Form extends React.Component {
       <div>
         <form>
           <h2 className={css.title}>Name</h2>
-          <input
-            className={css.input}
-            type="text"
-            name="name"
-            pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
-            title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
-            value={this.state.name}
-            onChange={this.handleNameChange}
-            required
-          />
-
+          <label>
+            <input
+              className={css.input}
+              type="text"
+              name="name"
+              pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
+              title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
+              value={this.state.name}
+              onChange={this.handleNameChange}
+              required
+            />
+          </label>
           <h2 className={css.title}>Number</h2>
-          <input
-            className={css.input}
-            type="tel"
-            name="number"
-            pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
-            title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
-            value={this.state.number}
-            onChange={event => this.setState({ number: event.target.value })}
-            required
-          />
+          <label>
+            <input
+              className={css.input}
+              type="tel"
+              name="number"
+              pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
+              title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
+              value={this.state.number}
+              onChange={event => this.setState({ number: event.target.value })}
+              required
+            />
+          </label>
 
           <button
             type="button"
@@ -109,12 +112,14 @@ class Form extends React.Component {
         <h2 className={css.title}>Contacts</h2>
 
         <h3>Find contacts by name</h3>
-        <input
-          type="text"
-          name="username"
-          value={this.state.filter}
-          onChange={this.handleFilterChange}
-        />
+        <label>
+          <input
+            type="text"
+            name="username"
+            value={this.state.filter}
+            onChange={this.handleFilterChange}
+          />
+        </label>
 
         <ul>{contactItems}</ul>
       </div>
