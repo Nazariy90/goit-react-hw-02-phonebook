@@ -2,21 +2,14 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 class ContactList extends React.Component {
-  getFilteredContacts = ({ filter, contacts }) => {
-    return contacts.filter(contact =>
-      contact.name.toLowerCase().includes(filter.toLowerCase())
-    );
-  };
-
   render() {
-    const { contacts, filter, onDeleteContact } = this.props;
-    const filteredContacts = this.getFilteredContacts({ filter, contacts });
+    const { contacts, onDeleteContact } = this.props;
 
     const handleDeleteContact = id => onDeleteContact({ id });
 
     return (
       <div>
-        {filteredContacts.map(contact => (
+        {contacts.map(contact => (
           <li key={contact.id}>
             {contact.name}: {contact.number}
             <button
@@ -40,7 +33,6 @@ ContactList.propTypes = {
       number: PropTypes.string.isRequired,
     })
   ).isRequired,
-  filter: PropTypes.string.isRequired,
   onDeleteContact: PropTypes.func.isRequired,
 };
 

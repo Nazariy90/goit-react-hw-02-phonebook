@@ -8,12 +8,9 @@ class ContactForm extends React.Component {
     number: '',
   };
 
-  handleNameChange = event => {
-    this.setState({ name: event.target.value });
-  };
-
-  handleNumberChange = event => {
-    this.setState({ number: event.target.value });
+  handleChange = event => {
+    const { name, value } = event.target;
+    this.setState({ [name]: value });
   };
 
   render() {
@@ -35,8 +32,8 @@ class ContactForm extends React.Component {
             name="name"
             pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
             title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
-            value={this.state.name}
-            onChange={this.handleNameChange}
+            value={name}
+            onChange={this.handleChange}
             required
           />
         </label>
@@ -48,8 +45,8 @@ class ContactForm extends React.Component {
             name="number"
             pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
             title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
-            value={this.state.number}
-            onChange={this.handleNumberChange}
+            value={number}
+            onChange={this.handleChange}
             required
           />
         </label>
@@ -58,7 +55,7 @@ class ContactForm extends React.Component {
           type="button"
           className={css.button}
           onClick={handleAddContact}
-          disabled={!this.state.name || !this.state.number}
+          disabled={!name || !number}
         >
           Add contact
         </button>
@@ -66,9 +63,5 @@ class ContactForm extends React.Component {
     );
   }
 }
-
-ContactForm.propTypes = {
-  onAddContact: PropTypes.func.isRequired,
-};
 
 export default ContactForm;

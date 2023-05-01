@@ -15,6 +15,13 @@ export class App extends React.Component {
     filter: '',
   };
 
+  getFilteredContacts = () => {
+    const { filter, contacts } = this.state;
+    return contacts.filter(contact =>
+      contact.name.toLowerCase().includes(filter.toLowerCase())
+    );
+  };
+
   handleAddContact = ({ name, number }) => {
     const existingContact = this.state.contacts.find(
       contact => contact.name.toLowerCase() === name.toLowerCase()
@@ -27,16 +34,16 @@ export class App extends React.Component {
 
     if (name.trim() && number.trim()) {
       const newContact = { id: nanoid(), name, number };
-      const newContacts = [...this.state.contacts, newContact];
-      this.setState({ contacts: newContacts, name: '', number: '' });
+      this.setState(prevState => ({
+        contacts: [...prevState.contacts, newContact],
+      }));
     }
   };
 
   handleDeleteContact = ({ id }) => {
-    const newContacts = this.state.contacts.filter(
-      contact => contact.id !== id
-    );
-    this.setState({ contacts: newContacts });
+    this.setState(prevState => ({
+      contacts: prevState.contacts.filter(contact => contact.id !== id),
+    }));
   };
 
   handleFilterChange = event => {
@@ -44,6 +51,8 @@ export class App extends React.Component {
   };
 
   render() {
+    const filteredContacts = this.getFilteredContacts();
+
     return (
       <div>
         <h1>Phonebook</h1>
@@ -55,8 +64,7 @@ export class App extends React.Component {
           onFilterChange={this.handleFilterChange}
         />
         <ContactList
-          contacts={this.state.contacts}
-          filter={this.state.filter}
+          contacts={filteredContacts}
           onDeleteContact={this.handleDeleteContact}
         />
       </div>
