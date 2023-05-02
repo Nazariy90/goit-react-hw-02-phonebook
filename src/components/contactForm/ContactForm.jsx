@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import css from '../app.module.css';
 
 class ContactForm extends React.Component {
